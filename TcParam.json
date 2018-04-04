@@ -1,0 +1,28 @@
+{
+   "rtiHost": "192.168.205.103",
+   "federationName": "VBS",
+   "tcFederateName": "TC_0001_DeadReckoning",
+   "sutFederateName": "VBS_DESKTOP-FJGI6I2_1fca5",
+   "sutFederateType": "VBSType",
+   "testTimeout": 30.0,
+   "positionThresholdMax" : 2.0,
+   "positionThresholdMin" : 0.1,
+   "orientationThresholdMax": 0.174533,
+   "orientationThresholdMin": 0.052359,
+   "sutFederateJoinTimeout": 15.0,
+   "timestampRequired": false,
+   "positionAndOrientationRequired": false,
+   
+   
+    "urls": 
+           [     
+                 "C:/IVCT_Runtime/FOMS/RPR-Switches_v2.0.xml",
+                 "C:/IVCT_Runtime/FOMS/RPR-Base_v2.0.xml",
+                 "C:/IVCT_Runtime/FOMS/RPR-Foundation_v2.0.xml",
+                 "C:/IVCT_Runtime/FOMS/RPR-Enumerations_v2.0.xml",
+                 "C:/IVCT_Runtime/FOMS/RPR-Physical_v2.0.xml"
+           ]
+
+           
+}
+
