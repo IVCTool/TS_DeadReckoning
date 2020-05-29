@@ -4,62 +4,46 @@ ext {
 
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~ Gradle Build Environment
-		//artifactCache = "${artifactory_contextUrl}/gradle"
-        gradleVersion = '2.9'
+        //artifactCache = "${artifactory_contextUrl}/gradle"
+        gradleVersion = '5.5.1'
         gradleWrapperVersion = "${gradleVersion}"
 
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~ IVCT settings
-		ivctVersion = '1.0.0'
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~ IVCT settings
+        ivctVersion = '2.2.2-SNAPSHOT'
 
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~ Test Cases settings
-		TS_DeadReckoningVersion = '0.0.1'
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~ Test Cases settings
+        TS_DeadReckoningVersion = '1.0.0'
 		
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~ testing
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~ testing
         junitVersion = '4.+'
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~ thirdparty
-		logbackVersion = '1.1.3'
-		slf4jVersion = '1.7.10'
-		activemqVersion = '5.12.0'
-		ejmlVersion = '0.31'
-		
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~ HLA Run Time
-		rti = "prti1516e"
-		//rti = "IEEE1516e"
-		//rti = "mak"
-		
-		switch (rti) {
-			case "prti1516e":	
-				rti_jar =   "prti1516e.jar"
-				rti_lib =   "C:/Program Files/prti1516e/lib"
-				break
-			case "mak":
-				logger.warn ('MAK RTI not configured yet')
-				break
-			case "IEEE1516e":
-			default:
-				logger.warn ('No RTI is used. Compile with empty interface')
+        logbackVersion = '1.1.3'
+        slf4jVersion = '1.7.10'
+        jsonSimpleVersion = '1.1.1'
+        gradleDockerPluginVersion = '4.9.0'		
+        ejmlVersion = '0.31'
 
-		}
-
-		// ~~~~~~~~~~~~~~~~~~~~~~~~~~  now create libraries with the versions from above
-		libraries = [
-
-
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~  now create libraries with the versions from above
+        libraries = [
+                tc_lib:                         "io.github.msg134:TC.lib:${ivctVersion}",
+                ieee_lib:                       "io.github.msg134:IEEE1516e:${ivctVersion}",
+		        
                 // ~~~~~~~~~~~~~~~~~~~~~~~~~~ thirdparty
                 logback_classic:                "ch.qos.logback:logback-classic:${logbackVersion}",
                 logback_core:                   "ch.qos.logback:logback-core:${logbackVersion}",
-
+		        
                 slf4j_api:                      "org.slf4j:slf4j-api:${slf4jVersion}",
                 slf4j_jcl_over_slf4j:           "org.slf4j:jcl-over-slf4j:${slf4jVersion}",
                 slf4j_jul_to_slf4j:             "org.slf4j:jul-to-slf4j:${slf4jVersion}",
                 slf4j_log4j_over_slf4j:         "org.slf4j:log4j-over-slf4j:${slf4jVersion}",
-
-				actimemqClient:					"org.apache.activemq:activemq-client:${activemqVersion}",
-
-				ejml:                           "org.ejml:ejml-all:${ejmlVersion}",
-
+		        
+                jsonSimple:                     "com.googlecode.json-simple:json-simple:${jsonSimpleVersion}",
+		        
+                ejml:                           "org.ejml:ejml-all:${ejmlVersion}",
+		        
                 // ~~~~~~~~~~~~~~~~~~~~~~~~~~ testing
-                junit:                          "junit:junit:${junitVersion}"
+                junit:                          "junit:junit:${junitVersion}",
+                docker:	                        "com.bmuschko:gradle-docker-plugin:${gradleDockerPluginVersion}"
         ]
 }

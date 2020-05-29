@@ -1,7 +1,7 @@
 {
-   "rtiHost": "192.168.205.103",
+   "rtiHost": "localhost",
    "federationName": "VBS",
-   "tcFederateName": "TC_0001_DeadReckoning",
+   "tcFederateName": "TC_0001",
    "sutFederateName": "VBS_DESKTOP-FJGI6I2_1fca5",
    "sutFederateType": "VBSType",
    "testTimeout": 30.0,

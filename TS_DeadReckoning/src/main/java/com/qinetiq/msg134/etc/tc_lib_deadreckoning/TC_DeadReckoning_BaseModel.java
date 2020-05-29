@@ -1,5 +1,6 @@
 /**
  * Copyright 2018, QinetiQ
+ * Copyright 2020, Thales Training & Simulation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -700,10 +701,6 @@ public class TC_DeadReckoning_BaseModel extends IVCT_BaseModel
         try
         {
             ivct_rti.createFederationExecution(tcParam.getFederationName(), tcParam.getUrls(), "HLAfloat64Time");
-        }
-        catch (final FederationExecutionAlreadyExists e)
-        {
-            this.logger.warn("initiateRti: FederationExecutionAlreadyExists (ignored)");
         }
         catch (CouldNotCreateLogicalTimeFactory | InconsistentFDD | ErrorReadingFDD | CouldNotOpenFDD | NotConnected
                 | RTIinternalError e)

@@ -1,19 +1,6 @@
-
 apply from: "./.shared/libraries.gradle"
 
-project.description = 'MSG-134 QinetiQ Validation Test Cases.'
 project.group = 'msg134-DeadReckoning'
 project.version = "${TS_DeadReckoningVersion}"
 
 apply from: "./.shared/commons.gradle"
-
-//apply plugin: 'application'
-
-//apply plugin: 'java'
-
-//apply plugin: 'eclipse'
-
-//project.mainClassName = 'de.fraunhofer.iosb.testrunner.JMSTestRunner'
-
-
-

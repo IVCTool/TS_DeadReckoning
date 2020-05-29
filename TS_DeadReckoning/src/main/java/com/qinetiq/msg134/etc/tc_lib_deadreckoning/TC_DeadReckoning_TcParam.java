@@ -1,5 +1,6 @@
 /**
  * Copyright 2018, QinetiQ
+ * Copyright 2020, Thales Training & Simulation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +52,7 @@ public class TC_DeadReckoning_TcParam implements IVCT_TcParam
     /**
      * The federate name of the test case
      */
-    protected String tcFederateName = "TC_0001_DeadReckoning";
+    protected String tcFederateName = "TC_0001";
     
     /**
      * The federate name of the SuT
@@ -217,7 +218,6 @@ public class TC_DeadReckoning_TcParam implements IVCT_TcParam
     /**
      * @return the federation name
      */
-    @Override
     public String getFederationName()
     {
         return this.federationName;
@@ -234,7 +234,6 @@ public class TC_DeadReckoning_TcParam implements IVCT_TcParam
     /**
      * @return the settings designator
      */
-    @Override
     public String getSettingsDesignator()
     {
         return "crcAddress=" + rtiHost;

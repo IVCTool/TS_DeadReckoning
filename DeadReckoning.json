@@ -1,18 +1,14 @@
 {
-    "id"              : "DeadReckoning",
-    "version"       :   "0.0.1",
-    "name"            : "Dead Reckoning Test Case Badge",
-    "description"     : "This tests the Dead Reckoning algorithms",
-    "graphics"		:	"/some/icon.png",
-    "tsRunTimeFolder" : "TS_DeadReckoning-0.0.1/bin",
-    "tsLibTimeFolder" : "TS_DeadReckoning-0.0.1/lib",
-
-    "dependency"      : ["HLA-BASE-2016"],
+    "id"              : "DeadReckoning-2020",
+    "version"         : "1.0.0",
+    "name"            : "DeadReckoning",
+    "description"     : "This is a test to verify the behaviour of dead reckoning algorithms in the federation by a sut.",
+    "graphics"        : "DeadReckoning-2020.png",
+    "dependency"      : ["HLA-BASE-2019"],
     "requirements"    : [
         {
-            "id"            : "TS_0001_DeadReckoning",
-            "description"   : "Dead Reckoning algorithm tests",
-            "TC"            : "com.qinetiq.msg134.etc.tc_deadreckoning.TC_0001_DeadReckoning"
+            "id"            : "IR_DR_0001",
+            "description"   : "Test Case 1",
         }
     ]
 }

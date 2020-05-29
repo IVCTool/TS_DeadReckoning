@@ -1,37 +1,93 @@
-apply plugin: 'application'
-apply plugin: 'java'
-
-mainClassName = 'de.fraunhofer.iosb.testrunner.JMSTestRunner'
-
-dependencies {
-    switch (rti) {
-		case "prti1516e":
-			logger.warn (':TS_DeadReckoning:pRTI is used. Make sure pRTI is installed on target machine to run TS_DeadReckoning')
-			compile files (rti_lib + "/" + rti_jar)
-			runtime fileTree (dir: rti_lib, include: '*.jar')
-			break
-		case "mak":
-			logger.warn (':TS_DeadReckoning:MAK RTI is not configure. DeadReckoning will not be runnable')
-		case "IEEE1516e":
-		default:
-			logger.warn (':TS_DeadReckoning:No RTI is used. TS_DeadReckoning will not be runnable')
-			compile     group: 'msg134-ivct-framework', name: 'IEEE1516e', version: ivctVersion
+buildscript {
+    repositories {
+		mavenLocal()
+		mavenCentral()
 	}
-
-	compile     group: 'msg134-ivct-framework', name: 'TC.lib', version: ivctVersion
-	compile     group: 'msg134-ivct-framework', name: 'MessagingHelpers', version: ivctVersion
-
-	compile     libraries.slf4j_api
-	compile     libraries.ejml
-
-	runtime		libraries.actimemqClient
-	runtime		libraries.logback_classic
-	runtime		libraries.logback_core
-
-	runtime     libraries.slf4j_jcl_over_slf4j
-	runtime     libraries.slf4j_jul_to_slf4j
-	runtime     libraries.slf4j_log4j_over_slf4j
+  dependencies {
+	classpath libraries.docker
+  }
 }
 
-    
+// apply plugin: "com.bmuschko.docker-remote-api"
+apply plugin: com.bmuschko.gradle.docker.DockerRemoteApiPlugin
 
+// Import task types
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+// Use task types
+task dockerBuildImage(type: DockerBuildImage) {
+    dependsOn 'install'
+    inputDir = file('.')
+    buildArgs.put('version', "${TS_DeadReckoningVersion}")
+    tags.add ("ivct/TS-DeadReckoning:${TS_DeadReckoningVersion}")
+}
+
+apply plugin: 'application'
+
+mainClassName = 'com.qinetiq.msg134.etc.tc_deadreckoning.TC_0001'
+
+dependencies {
+    compileOnly    libraries.ieee_lib
+    compileOnly    libraries.tc_lib
+
+    compileOnly    libraries.logback_classic
+    compileOnly    libraries.logback_core
+
+    compileOnly    libraries.slf4j_api
+    compileOnly    libraries.slf4j_jcl_over_slf4j
+    compileOnly    libraries.slf4j_jul_to_slf4j
+    compileOnly    libraries.slf4j_log4j_over_slf4j
+	
+    compileOnly    libraries.ejml
+
+    compileOnly    libraries.jsonSimple
+    compileOnly(
+            'junit:junit:4.12'
+    )
+
+    testCompileOnly     libraries.tc_lib
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-api:5.1.0',
+            "io.github.ivctool:Command:${ivctVersion}"
+    )
+    testRuntimeOnly(
+            'org.junit.jupiter:junit-jupiter-engine:5.1.0',
+            'org.junit.vintage:junit-vintage-engine:5.1.0'
+    )
+}
+
+// test {
+//     useJUnitPlatform()
+// }
+
+
+// Write the  IVCT-Version as set to variable in libraries.gradle
+// in a  property-file
+task writeVersion {
+    group = "Build"
+    description = "Creates a properties file with version information"
+
+    doLast {
+        def prop = new Properties()
+        prop.version = ivctVersion
+        prop.ivctVersion = ivctVersion
+        prop.TS_DeadReckoningVersion = TS_DeadReckoningVersion
+        prop.build = "git describe --tags".execute().text.trim()
+        mkdir "src/main/resources"
+        File propFile = file('src/main/resources/testCaseBuild.properties')
+        prop.store(propFile.newWriter(), null)
+    }
+}
+processResources.dependsOn writeVersion
+
+
+// write IVCT-Version informations to manifest - file
+jar{ 
+  manifest{
+     attributes(
+     'Build-Timestamp': new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(new Date()),
+        'ivctVersion' : ivctVersion,
+        'build' :       "git describe --tags".execute().text.trim()
+     )
+  }
+}
