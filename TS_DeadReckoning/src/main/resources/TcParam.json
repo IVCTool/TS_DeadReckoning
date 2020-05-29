@@ -11,18 +11,14 @@
    "orientationThresholdMin": 0.052359,
    "sutFederateJoinTimeout": 15.0,
    "timestampRequired": false,
-   "positionAndOrientationRequired": false,
-   
-   
-    "urls": 
-           [     
-                 "C:/IVCT_Runtime/FOMS/RPR-Switches_v2.0.xml",
-                 "C:/IVCT_Runtime/FOMS/RPR-Base_v2.0.xml",
-                 "C:/IVCT_Runtime/FOMS/RPR-Foundation_v2.0.xml",
-                 "C:/IVCT_Runtime/FOMS/RPR-Enumerations_v2.0.xml",
-                 "C:/IVCT_Runtime/FOMS/RPR-Physical_v2.0.xml"
-           ]
-
-           
+   "positionAndOrientationRequired": false,   
+   "urls": 
+          [     
+                "$(IVCT_SUT_HOME_ID)/$(IVCT_SUT_ID)/$(IVCT_TESTSUITE_ID)/RPR-Switches_v2.0.xml",
+                "$(IVCT_SUT_HOME_ID)/$(IVCT_SUT_ID)/$(IVCT_TESTSUITE_ID)/RPR-Base_v2.0.xml",
+                "$(IVCT_SUT_HOME_ID)/$(IVCT_SUT_ID)/$(IVCT_TESTSUITE_ID)/RPR-Foundation_v2.0.xml",
+                "$(IVCT_SUT_HOME_ID)/$(IVCT_SUT_ID)/$(IVCT_TESTSUITE_ID)/RPR-Enumerations_v2.0.xml",
+                "$(IVCT_SUT_HOME_ID)/$(IVCT_SUT_ID)/$(IVCT_TESTSUITE_ID)/RPR-Physical_v2.0.xml"
+          ]
 }
 
